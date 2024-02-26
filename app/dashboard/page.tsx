@@ -1,51 +1,55 @@
-import Link from 'next/link';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-export default function Page() {
+// import Link from 'next/link';
+// import { ArrowRightIcon } from '@heroicons/react/24/outline';
+// export default function Page() {
+//   return (
+//     <main className="flex min-h-screen flex-col p-6">
+//       <p>
+//         Welcome to{' '}
+//         <strong
+//           className={`text-xl text-green-600 md:text-3xl md:leading-normal`}
+//         >
+//           Dashboard Page
+//         </strong>
+//       </p>
+//     </main>
+//   );
+// }
+import { Card } from '@/app/ui/dashboard/cards';
+import RevenueChart from '@/app/ui/dashboard/revenue-chart';
+import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
+import { lusitana } from '@/app/ui/fonts';
+
+// import { fetchRevenue } from '@/app/lib/data';
+import { fetchRevenue, fetchLatestInvoices, fetchCardData } from '@/app/lib/data';
+ 
+export default async function Page() {
+  const revenue = await fetchRevenue();
+  const latestInvoices = await fetchLatestInvoices();
+  const {
+    numberOfInvoices,
+    numberOfCustomers,
+    totalPaidInvoices,
+    totalPendingInvoices,
+  } = await fetchCardData();
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <p>
-        Welcome to{' '}
-        <strong
-          className={`text-xl text-green-600 md:text-3xl md:leading-normal`}
-        >
-          Dashboard Page
-        </strong>
-      </p>
-      {/* <div className="mt-4 flex grow flex-col md:flex-row">
-        <div className="flex flex-col justify-center rounded-lg bg-gray-50 px-6 py-1 md:w-2/5 md:px-20">
-          <Link
-            href="/"
-            className="flex items-center gap-5 self-start rounded-lg bg-orange-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Home</span> <ArrowRightIcon className="w-7 md:w-6" />
-          </Link>
-        </div>
-      </div> */}
-{/* <h1>uno dos tres</h1> */}
-      {/* <div >
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-3 md:w-2/5 md:px-20">
-          <Link
-            href="/dashboard/customers"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Customers</span> <ArrowRightIcon className="w-7 md:w-6" />
-          </Link>
-        </div>
+    <main>
+      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+        Dashboard
+      </h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+         <Card title="Collected" value={totalPaidInvoices} type="collected" /> 
+         <Card title="Pending" value={totalPendingInvoices} type="pending" /> 
+         <Card title="Total Invoices" value={numberOfInvoices} type="invoices" /> 
+        <Card
+          title="Total Customers"
+          value={numberOfCustomers}
+          type="customers"
+        /> 
       </div>
-
-      <div >
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-3 md:w-2/5 md:px-20">
-          <Link
-            href="/dashboard/invoices"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Invoices</span> <ArrowRightIcon className="w-7 md:w-6" />
-          </Link>
-        </div>
-      </div> */}
-
-
-      
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+        <RevenueChart revenue={revenue}  />
+        <LatestInvoices latestInvoices={latestInvoices} />
+      </div>
     </main>
   );
 }
