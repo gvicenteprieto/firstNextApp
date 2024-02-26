@@ -21,3 +21,7 @@ body {
   background-color: rgb(63, 63, 63);
   color: white;
 }
+
+p {
+  color: green;
+}
