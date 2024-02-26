@@ -34,7 +34,7 @@ export default function Page() {
 
 
       {/* <div className="flex grow flex-col gap-4 md:flex-row"> */}
-      <div >
+      {/* <div >
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-3 md:w-2/5 md:px-20">
           <Link
             href="/dashboard/customers"
@@ -43,9 +43,9 @@ export default function Page() {
             <span>Customers</span> <ArrowRightIcon className="w-7 md:w-6" />
           </Link>
         </div>
-      </div>
+      </div> */}
 
-      <div >
+      {/* <div >
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-3 md:w-2/5 md:px-20">
           <Link
             href="/dashboard/invoices"
@@ -54,7 +54,7 @@ export default function Page() {
             <span>Invoices</span> <ArrowRightIcon className="w-7 md:w-6" />
           </Link>
         </div>
-      </div>
+      </div> */}
 
 
 
